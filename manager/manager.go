@@ -446,7 +446,7 @@ func (m *Manager) writeRelease(release *Release) error {
 		return err
 	}
 
-	data, err := pgp.SignData([]byte(m.config.PrivateGPGKey), nil, buf.Bytes())
+	data, err := pgp.SignData([]byte(m.config.PrivateGPGKey), []byte(m.config.PrivateGPGPasskey), buf.Bytes())
 	if err != nil {
 		return err
 	}

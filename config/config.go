@@ -6,11 +6,12 @@ import (
 )
 
 type Config struct {
-	S3Endpoint    string `yaml:"s3_endpoint"`
-	S3Bucket      string `yaml:"s3_bucket"`
-	S3AccessKey   string `yaml:"s3_access_key"`
-	S3SecretKey   string `yaml:"s3_secret_key"`
-	PrivateGPGKey string `yaml:"private_gpg_key"`
+	S3Endpoint        string `yaml:"s3_endpoint"`
+	S3Bucket          string `yaml:"s3_bucket"`
+	S3AccessKey       string `yaml:"s3_access_key"`
+	S3SecretKey       string `yaml:"s3_secret_key"`
+	PrivateGPGKey     string `yaml:"private_gpg_key"`
+	PrivateGPGPasskey string `yaml:"private_gpg_passkey"`
 }
 
 func New() *Config {

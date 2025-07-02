@@ -44,6 +44,11 @@ func main() {
 				Usage:   "Load GPG key from `FILE`",
 				Sources: cli.EnvVars("FAPTLY_PRIVATE_GPG_KEY"),
 			},
+			&cli.StringFlag{
+				Name:    "private_gpg_passkey",
+				Usage:   "Private GPG passkey",
+				Sources: cli.EnvVars("FAPTLY_PRIVATE_GPG_PASSKEY"),
+			},
 		},
 		Before: func(ctx context.Context, command *cli.Command) (context.Context, error) {
 			cfg := config.New()
@@ -54,7 +59,13 @@ func main() {
 				}
 			}
 
-			for _, k := range []string{"s3_endpoint", "s3_bucket", "s3_access_key", "s3_secret_key"} {
+			for _, k := range []string{
+				"s3_endpoint",
+				"s3_bucket",
+				"s3_access_key",
+				"s3_secret_key",
+				"private_gpg_passkey",
+			} {
 				if command.String(k) != "" {
 					switch k {
 					case "s3_endpoint":
@@ -65,6 +76,8 @@ func main() {
 						cfg.S3AccessKey = command.String(k)
 					case "s3_secret_key":
 						cfg.S3SecretKey = command.String(k)
+					case "private_gpg_passkey":
+						cfg.PrivateGPGPasskey = command.String(k)
 					}
 				}
 			}
